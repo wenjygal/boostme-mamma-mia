@@ -43,17 +43,19 @@ html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family
 .caption h2{ font-family:'Suez One',serif; font-size:clamp(22px,4vw,32px); margin:0 0 10px; text-wrap:balance; }
 .caption p{ font-size:clamp(15px,2.2vw,18px); line-height:1.6; margin:0; max-width:60ch; }
 
-/* final scene: the couple + food + cup + check occupy the whole center of the frame — there is no safe
-   horizontal band. Anchoring to a side column (left, where the wine bottle/background sit) clears all of it. */
+/* final scene: Gal marked the exact gap that's actually empty — the narrow negative space between the
+   two faces, at their eye line, between the candle and the table. Physical left/transform (not logical
+   inset-inline-start), so this centers correctly under dir="rtl" too. */
 .caption.credit{
-  text-align:right; max-width:280px; left:4%; top:50%; transform:translateY(-50%);
-  bottom:auto; padding:16px 18px;
+  text-align:center; max-width:230px; left:50%; top:44%; transform:translate(-50%,-50%);
+  bottom:auto; padding:14px 14px;
 }
-.caption.credit h2{ font-size:clamp(17px,2.6vw,22px); }
-.caption.credit p{ font-size:clamp(13px,1.6vw,14px); }
+.caption.credit h2{ font-size:clamp(15px,2.2vw,18px); }
+.caption.credit p{ font-size:clamp(12px,1.5vw,13px); }
+.caption.credit .wa-btn{ padding:8px 14px; font-size:13px; }
 .caption.credit::before{
   content:""; position:absolute; inset:0; z-index:-1; border-radius:14px;
-  background:rgba(15,9,6,.78);
+  background:rgba(15,9,6,.82);
 }
 .wa-btn{
   display:inline-flex; align-items:center; gap:8px; margin-top:18px;
