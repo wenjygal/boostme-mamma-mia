@@ -43,18 +43,17 @@ html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family
 .caption h2{ font-family:'Suez One',serif; font-size:clamp(22px,4vw,32px); margin:0 0 10px; text-wrap:balance; }
 .caption p{ font-size:clamp(15px,2.2vw,18px); line-height:1.6; margin:0; max-width:60ch; }
 
-/* final scene: faces sit in the upper band, the espresso cup + check sit low — caption goes in the narrow
-   middle band (roughly torso/table-edge height) so it clears both. left/transform are physical on purpose:
-   inset-inline-start + translateX(-50%) fought each other under dir="rtl" and pushed the box off-center. */
+/* final scene: the couple + food + cup + check occupy the whole center of the frame — there is no safe
+   horizontal band. Anchoring to a side column (left, where the wine bottle/background sit) clears all of it. */
 .caption.credit{
-  text-align:center; max-width:380px; left:50%; top:46%; transform:translate(-50%,-50%);
-  bottom:auto; padding:14px 20px;
+  text-align:right; max-width:280px; left:4%; top:50%; transform:translateY(-50%);
+  bottom:auto; padding:16px 18px;
 }
-.caption.credit h2{ font-size:clamp(18px,3vw,24px); }
-.caption.credit p{ font-size:clamp(13px,1.8vw,15px); }
+.caption.credit h2{ font-size:clamp(17px,2.6vw,22px); }
+.caption.credit p{ font-size:clamp(13px,1.6vw,14px); }
 .caption.credit::before{
   content:""; position:absolute; inset:0; z-index:-1; border-radius:14px;
-  background:rgba(15,9,6,.72);
+  background:rgba(15,9,6,.78);
 }
 .wa-btn{
   display:inline-flex; align-items:center; gap:8px; margin-top:18px;
