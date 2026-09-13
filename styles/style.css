@@ -48,7 +48,9 @@ html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family
    two faces, at their eye line, between the candle and the table. Physical left/transform (not logical
    inset-inline-start), so this centers correctly under dir="rtl" too. */
 .caption.credit{
-  text-align:center; max-width:230px; left:50%; top:28%; transform:translate(-50%,-50%);
+  text-align:center; max-width:230px;
+  inset-inline-start:auto; inset-inline-end:auto; /* clear the base .caption full-width constraints — they were still active and fighting the left:50% below */
+  left:50%; top:28%; transform:translate(-50%,-50%);
   bottom:auto; padding:14px 14px;
 }
 .caption.credit h2{ font-size:clamp(18px,2.6vw,22px); }
