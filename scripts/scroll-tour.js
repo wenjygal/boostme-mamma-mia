@@ -38,7 +38,7 @@
     var r = el.getBoundingClientRect();
     var vh = window.innerHeight;
     var progress = Math.min(1, Math.max(0, (vh - r.top) / (r.height + vh)));
-    var scale = 1 + progress * 0.09;
+    var scale = 1 + progress * 0.045;
     var bg = bgs[current];
     if (bg) bg.style.transform = 'scale(' + scale.toFixed(3) + ')';
   }
