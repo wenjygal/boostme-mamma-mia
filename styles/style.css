@@ -56,8 +56,11 @@ html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family
 }
 .wa-btn:focus-visible, a:focus-visible{ outline:3px solid var(--tomato); outline-offset:2px; }
 
-/* the track: invisible tall steps that drive which layer is "on" and how zoomed it is */
-.track{ position:relative; z-index:2; margin-top:-100svh; }
+/* the track: invisible tall steps that drive which layer is "on" and how zoomed it is.
+   z-index:2 puts it above the sticky stage (z-index:1) in the .tour stacking context —
+   without pointer-events:none here, these full-viewport spacer divs silently swallow
+   every click/tap on the page, including the WhatsApp button. */
+.track{ position:relative; z-index:2; margin-top:-100svh; pointer-events:none; }
 .step{ height:100svh; }
 
 .legal-footer{
