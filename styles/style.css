@@ -1,0 +1,98 @@
+:root{
+  --espresso:#1b120d;
+  --cream:#faf3e7;
+  --tomato:#e2694a;
+  --basil:#8fb37a;
+}
+*{box-sizing:border-box}
+html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family:'Assistant',system-ui,sans-serif; }
+.tour{ position:relative; }
+
+.progress{
+  position:fixed; inset-inline-end:14px; top:50%; transform:translateY(-50%);
+  display:flex; flex-direction:column; gap:8px; z-index:30;
+}
+.progress i{ width:7px;height:7px;border-radius:50%; background:rgba(250,243,231,.28); display:block; transition:background .3s,transform .3s; }
+.progress i.on{ background:var(--tomato); transform:scale(1.5); }
+
+/* the pinned stage: stays fixed while the track underneath scrolls */
+.stage{ position:sticky; top:0; height:100svh; overflow:hidden; z-index:1; }
+.layer{
+  position:absolute; inset:0;
+  opacity:0;
+  transition:opacity 1.1s ease;
+  will-change:opacity,transform;
+}
+.layer.on{ opacity:1; }
+.layer .bg{ position:absolute; inset:-6%; background-size:cover; background-position:center; }
+.layer::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(15,9,6,0) 38%, rgba(15,9,6,.92) 100%);
+}
+
+.caption{
+  position:absolute; inset-inline-start:0; inset-inline-end:0; bottom:0;
+  padding:0 22px 9vh; z-index:2;
+  max-width:600px;
+}
+.caption .tag{
+  display:inline-block; font-family:monospace; font-size:12px; letter-spacing:.08em;
+  color:var(--espresso); background:var(--tomato); padding:3px 10px; border-radius:2px;
+  margin-bottom:14px; transform:rotate(-1deg);
+}
+.caption h2{ font-family:'Suez One',serif; font-size:clamp(22px,4vw,32px); margin:0 0 10px; text-wrap:balance; }
+.caption p{ font-size:clamp(15px,2.2vw,18px); line-height:1.6; margin:0; max-width:60ch; }
+
+/* final scene: caption anchored to the top — the espresso cup + check sit low in the frame and must stay visible */
+.caption.credit{
+  text-align:center; max-width:420px; inset-inline-start:50%; transform:translateX(-50%);
+  bottom:auto; top:6vh; padding:0 22px;
+}
+.caption.credit::before{
+  content:""; position:absolute; inset:-16px -24px auto -24px; height:calc(100% + 32px);
+  background:linear-gradient(180deg, rgba(15,9,6,.85) 0%, rgba(15,9,6,.3) 80%, rgba(15,9,6,0) 100%);
+  z-index:-1; border-radius:0 0 24px 24px;
+}
+.wa-btn{
+  display:inline-flex; align-items:center; gap:8px; margin-top:18px;
+  background:var(--basil); color:var(--espresso); font-weight:800;
+  padding:12px 22px; border-radius:999px; text-decoration:none; font-size:16px;
+}
+.wa-btn:focus-visible, a:focus-visible{ outline:3px solid var(--tomato); outline-offset:2px; }
+
+/* the track: invisible tall steps that drive which layer is "on" and how zoomed it is */
+.track{ position:relative; z-index:2; margin-top:-100svh; }
+.step{ height:100svh; }
+
+.legal-footer{
+  position:fixed; inset-inline:0; bottom:0; z-index:40;
+  background:rgba(15,9,6,.88);
+  display:flex; justify-content:center; gap:18px; flex-wrap:wrap;
+  padding:8px 16px; font-size:12px;
+}
+.a11y-link{
+  background:none; border:none; color:rgba(250,243,231,.75);
+  font-family:'Assistant',system-ui,sans-serif; font-size:12px;
+  text-decoration:underline; cursor:pointer; padding:4px;
+}
+.a11y-link:hover, .a11y-link:focus-visible{ color:var(--cream); }
+.a11y-link:focus-visible{ outline:3px solid var(--tomato); outline-offset:2px; }
+
+.a11y-modal{
+  max-width:520px; width:calc(100% - 40px); border:none; border-radius:8px;
+  padding:2rem; background:var(--cream); color:var(--espresso);
+  font-family:'Assistant',system-ui,sans-serif;
+}
+.a11y-modal::backdrop{ background:rgba(15,9,6,.7); }
+.a11y-modal h2{ font-family:'Suez One',serif; font-size:22px; margin:0 0 14px; }
+.a11y-modal p{ line-height:1.7; margin:0 0 12px; }
+.a11y-modal a{ color:var(--tomato); }
+.a11y-close{
+  position:absolute; top:14px; inset-inline-end:14px;
+  background:none; border:none; font-size:18px; cursor:pointer; color:var(--espresso);
+  width:32px; height:32px; border-radius:50%;
+}
+.a11y-close:hover{ background:rgba(27,18,13,.08); }
+.a11y-close:focus-visible{ outline:3px solid var(--tomato); outline-offset:2px; }
+
+@media (prefers-reduced-motion: reduce){ .layer{ transition:none; } .layer .bg{ transition:none !important; } }
