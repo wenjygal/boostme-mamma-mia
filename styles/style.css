@@ -7,6 +7,9 @@
 *{box-sizing:border-box}
 html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family:'Assistant',system-ui,sans-serif; }
 .tour{ position:relative; }
+@media (prefers-reduced-motion: no-preference){
+  html{ scroll-behavior:smooth; }
+}
 
 .progress{
   position:fixed; inset-inline-end:14px; top:50%; transform:translateY(-50%);
@@ -89,6 +92,11 @@ html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family
   padding:14px 26px; border-radius:999px; text-decoration:none; font-size:19px;
 }
 .wa-btn:focus-visible, a:focus-visible{ outline:3px solid var(--tomato); outline-offset:2px; }
+.restart-link{
+  display:inline-block; margin-top:14px; margin-inline-start:14px;
+  color:var(--cream); opacity:.85; font-size:15px; text-decoration:underline;
+}
+.restart-link:hover, .restart-link:focus-visible{ opacity:1; }
 
 /* the track: invisible tall steps that drive which layer is "on" and how zoomed it is.
    z-index:2 puts it above the sticky stage (z-index:1) in the .tour stacking context —
