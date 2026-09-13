@@ -47,7 +47,11 @@ html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family
 .caption p{ font-size:clamp(18px,2.6vw,22px); line-height:1.6; margin:0; max-width:60ch; }
 
 /* final scene: same bottom-anchored overlay treatment as every other scene (not a special
-   floating card) so the tour ends the way it reads the whole way through. */
+   floating card) so the tour ends the way it reads the whole way through — but this is the
+   one photo with a specific subject (the espresso cup + logo) sitting bottom-center/left,
+   so unlike every other caption this one doesn't span the full width: it hugs the start
+   (right) side and leaves the cup uncovered instead of running text straight over it. */
+.caption.credit{ inset-inline-end:auto; max-width:min(600px, 72%); padding-bottom:34vh; }
 .caption.credit .credit-line{ margin-top:8px; font-weight:800; }
 .wa-btn{
   display:inline-flex; align-items:center; gap:8px; margin-top:18px;
