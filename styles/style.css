@@ -15,6 +15,19 @@ html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family
 .progress i{ width:7px;height:7px;border-radius:50%; background:rgba(250,243,231,.28); display:block; transition:background .3s,transform .3s; }
 .progress i.on{ background:var(--tomato); transform:scale(1.5); }
 
+/* small persistent brand mark, physical top-right (not logical) — deliberately the
+   opposite corner from the progress dots regardless of RTL. Decorative only: the real
+   BOOST ME credit is spelled out at the end of the tour, so this stays aria-hidden. */
+.brand-mark{
+  position:fixed; top:16px; right:16px; z-index:35;
+  height:30px; width:auto;
+  filter:drop-shadow(0 1px 4px rgba(0,0,0,.6));
+  pointer-events:none;
+}
+@media (max-width:640px){
+  .brand-mark{ height:24px; top:12px; right:12px; }
+}
+
 /* the pinned stage: stays fixed while the track underneath scrolls.
    overflow:hidden used to live here, but sticky + overflow:hidden on the SAME element
    is a known WebKit/mobile-Safari bug that silently turns sticky into plain static
@@ -53,13 +66,23 @@ html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family
 .caption h2{ font-family:'Suez One',serif; font-size:clamp(26px,4.8vw,38px); margin:0 0 10px; text-wrap:balance; }
 .caption p{ font-size:clamp(18px,2.6vw,22px); line-height:1.6; margin:0; max-width:60ch; }
 
-/* final scene: same bottom-anchored overlay treatment as every other scene (not a special
-   floating card) so the tour ends the way it reads the whole way through — but this is the
-   one photo with a specific subject (the espresso cup + logo) sitting bottom-center/left,
-   so unlike every other caption this one doesn't span the full width: it hugs the start
-   (right) side and leaves the cup uncovered instead of running text straight over it. */
-.caption.credit{ inset-inline-end:auto; max-width:min(600px, 72%); padding-bottom:34vh; }
+/* final scene: same overlay treatment (tag/heading/paragraph, no special floating card)
+   as every other scene — but this is the one photo where the subject that matters (the
+   espresso cup + logo) sits at the BOTTOM of the frame, so darkening the bottom like
+   every other scene either hides the cup under a scrim or forces the caption up into a
+   tall, cramped, over-wrapped block fighting the couple's faces for space. Flipped instead:
+   this scene darkens from the TOP down (mirror of the base gradient) and the caption sits
+   up there over plain ambient background, leaving the cup fully lit and uncovered below. */
+.layer[data-i="9"]::after{
+  background:linear-gradient(180deg, rgba(15,9,6,.95) 0%, rgba(15,9,6,.90) 15%, rgba(15,9,6,.55) 38%, rgba(15,9,6,0) 70%, rgba(15,9,6,0) 100%);
+}
+.caption.credit{
+  top:0; bottom:auto;
+  inset-inline-end:auto; max-width:min(600px, 78%);
+  padding:8vh 22px 0;
+}
 .caption.credit .credit-line{ margin-top:8px; font-weight:800; }
+.caption.credit .nowrap{ white-space:nowrap; }
 .wa-btn{
   display:inline-flex; align-items:center; gap:8px; margin-top:18px;
   background:var(--basil); color:var(--espresso); font-weight:800;
