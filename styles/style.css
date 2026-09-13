@@ -15,10 +15,17 @@ html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family
 .progress i{ width:7px;height:7px;border-radius:50%; background:rgba(250,243,231,.28); display:block; transition:background .3s,transform .3s; }
 .progress i.on{ background:var(--tomato); transform:scale(1.5); }
 
-/* the pinned stage: stays fixed while the track underneath scrolls */
-.stage{ position:sticky; top:0; height:100svh; overflow:hidden; z-index:1; }
+/* the pinned stage: stays fixed while the track underneath scrolls.
+   overflow:hidden used to live here, but sticky + overflow:hidden on the SAME element
+   is a known WebKit/mobile-Safari bug that silently turns sticky into plain static
+   positioning — the whole stage just scrolls with the page instead of pinning. The
+   clipping (needed so each layer's -3% ken-burns bleed doesn't peek past the edges)
+   moved down to .layer instead, which is a descendant of the sticky element, not the
+   sticky element itself, so it can't interfere with .stage's own stickiness. */
+.stage{ position:sticky; top:0; height:100svh; z-index:1; }
 .layer{
   position:absolute; inset:0;
+  overflow:hidden;
   opacity:0;
   transition:opacity 1.1s ease;
   will-change:opacity,transform;
