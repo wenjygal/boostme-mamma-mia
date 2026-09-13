@@ -26,7 +26,13 @@ html,body{ margin:0; background:var(--espresso); color:var(--cream); font-family
   height:30px; width:auto;
   filter:drop-shadow(0 1px 4px rgba(0,0,0,.6));
   pointer-events:none;
+  transition:opacity .4s ease;
 }
+/* finale scene already says "BOOST ME" three times over (tag, credit line, the logo
+   baked into the espresso crema itself) — the persistent corner mark on top of that
+   is one mention too many, so it fades out for just that scene. Graceful no-op in
+   browsers without :has() support (icon just stays visible there too). */
+.tour:has(.layer[data-i="9"].on) .brand-mark{ opacity:0; }
 @media (max-width:640px){
   .brand-mark{ height:24px; top:12px; right:12px; }
 }
